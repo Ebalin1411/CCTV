@@ -4,7 +4,7 @@
 import prisma from '../lib/prisma';
 
 export async function createComplaint(formData: FormData) {
-  const customerId = Number(formData.get('customerId'));
+   const customerId = formData.get('customerId')?.toString() as any;
   const title = formData.get('title')?.toString();
   const description = formData.get('description')?.toString();
   const status = formData.get('status')?.toString() as any;
@@ -32,4 +32,5 @@ export async function createComplaint(formData: FormData) {
     return { success: false, error: '❌ ' + error.message };
   }
 }
+
 
