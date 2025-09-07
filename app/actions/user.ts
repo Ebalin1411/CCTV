@@ -1,6 +1,6 @@
 'use server';
 
-import { Role } from '@prisma/client';
+
 import bcrypt from 'bcryptjs';
 import prisma from '../lib/prisma';
 
@@ -9,7 +9,7 @@ export async function createUser(formData: FormData) {
   const email = formData.get('email')?.toString();
   const mobile = formData.get('phoneNumber')?.toString();
   const password = formData.get('password')?.toString();
-  const role = formData.get('role')?.toString() as Role;
+  const role = formData.get('role')?.toString() as any;
 
   if (!name || !email || !password || !role) {
     throw new Error('⚠️ Name, email, password, and role are required');
@@ -37,3 +37,4 @@ export async function createUser(formData: FormData) {
     return { success: false, error: error.message };
   }
 }
+
